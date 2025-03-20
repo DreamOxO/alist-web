@@ -53,7 +53,7 @@ jobs:
       - name: Checkout dist repo
         uses: actions/checkout@v4
         with:
-          repository: alist-org/web-dist
+          repository: DreamOxO/web-dist
           ref: main
           path: web-dist
           persist-credentials: false
@@ -68,12 +68,10 @@ jobs:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Publish npm
-        run: |
           cd alist-web
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
           pnpm publish --no-git-checks
           cd ..
-        env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Upload dist files
@@ -82,7 +80,7 @@ jobs:
           github_token: ${{ secrets.MY_TOKEN }}
           branch: main
           directory: web-dist
-          repository: alist-org/web-dist
+          repository: DreamOxO/web-dist
 
       - name: Release
         uses: softprops/action-gh-release@v1
